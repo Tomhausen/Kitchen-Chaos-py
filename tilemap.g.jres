@@ -1,0 +1,56 @@
+{
+    "tile1": {
+        "data": "hwQQABAAAAD//////////+/9/u7u7v7+3//+//////7//v7e7+79/u/+/v3u3v/+7/7+7+79/v7v/f7u3u/+/t///u797v7+//7+3u/u/f7v/v797t7//u/+/u/u/f7+7/3+7t7v/v7f//7u/e7+/v/+/v/////+7/7+7u7u/v7//////////w==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "crate"
+    },
+    "transparency16": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true
+    },
+    "tile2": {
+        "data": "hwQQABAAAADd3d3d3d3d3d3d3R3d3d3d3dHd3d3dHd3d3d3d3d3d3d3d3d3d3d3d3d3d3R3d3d3d3R3d3d3d3d3d3d3d3d3R3d3d3d3d3d0d3d3d3d3d3d3d3d3d3d3d3d0d3R3d3d3d3d3d3d3d3d3d3d3d3R3dHd3d3d3d3d3d3d3d3d3d3Q==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "floor"
+    },
+    "tile3": {
+        "data": "hwQQABAAAADb3d3N3N3dzb27u9zNu7vLvbvLvbu8u8u9u9y7u8u7y73Lvbu7u7zLvdy7u7u7y8vNvbu7u7u7vNy7u7u7u7vL3Lu7u7u7u9zNu7u7u7vLzb28u7u7u9zLvcu7u7vLvcu9u7y7u9y7y727y7vLvbvLvbu7vNy7u8vMzMzLzczMrA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "counter"
+    },
+    "tile4": {
+        "data": "hwQQABAAAAAMAAAAAAAAwMAAAAAAAAAMAAwAAAAAwAAAwAAAAAAMAAAADAAAwAAAAADAAAAMAAAAAAAMwAAAAAAAAMAMAAAAAAAAwAwAAAAAAAAMwAAAAAAAwAAADAAAAAAMAADAAAAAwAAAAAAMAAAMAAAAAMAAwAAAAAAAAAwMAAAAAAAAwA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "conveyor spawn"
+    },
+    "tile5": {
+        "data": "hwQQABAAAADb3d3d3d3dzb27u7u7u7vLvbu7u7u7u8u9u7u7u7u7y727u7u7u7vLvbu7u7u7u8u9u7u7u7u7y727u7u7u7vLvbu7u7u7u8u9u7u7u7u7y727u7u7u7vLvbu7u7u7u8u9u7u7u7u7y727u7u7u7vLvbu7u7u7u8vMzMzMzMzMrA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "corner counter"
+    },
+    "kitchen1": {
+        "id": "kitchen1",
+        "mimeType": "application/mkcd-tilemap",
+        "data": "MTAwYTAwMDgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwNTA1MDMwMzAzMDMwMzAzMDUwNTAxMDIwMjAyMDIwMjAyMDIwMjA0MDEwMjAyMDIwMjAyMDIwMjAyMDMwMTAyMDIwMjAyMDIwMjAyMDIwMzAxMDIwMjAyMDIwMjAyMDIwMjA0MDUwNTAzMDMwMzAzMDMwMzA1MDUwMDAwMDAwMDAwMDAwMDAwMDAwMDIyMjIyMjIyMjIwMjAwMDAwMDIwMDIwMDAwMDAyMDAyMDAwMDAwMjAwMjAwMDAwMDIwMjIyMjIyMjIyMg==",
+        "tileset": [
+            "myTiles.transparency16",
+            "myTiles.tile1",
+            "myTiles.tile2",
+            "myTiles.tile3",
+            "myTiles.tile4",
+            "myTiles.tile5"
+        ],
+        "displayName": "kitchen"
+    },
+    "*": {
+        "mimeType": "image/x-mkcd-f4",
+        "dataEncoding": "base64",
+        "namespace": "myTiles"
+    }
+}
