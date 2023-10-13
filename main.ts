@@ -138,6 +138,26 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function prepare_ingredient(
     }
     
 })
+function rat_spawn() {
+    let rat = sprites.create(assets.image`rat`, SpriteKind.Enemy)
+    rat.z = -1
+    rat.lifespan = 10000
+    tiles.placeOnRandomTile(rat, assets.tile`crate`)
+    rat.setFlag(SpriteFlag.GhostThroughWalls, true)
+    rat.follow(sprites.allOfKind(SpriteKind.plate)[0], 30)
+    timer.after(randint(8000, 15000), rat_spawn)
+}
+
+timer.after(randint(8000, 15000), rat_spawn)
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.plate, function rat_steal(rat: Sprite, plate: Sprite) {
+    sprites.destroyAllSpritesOfKind(SpriteKind.plate)
+    create_order()
+    rat.follow(sprites.allOfKind(SpriteKind.belt)[0], 30)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function catch_rat(player: Sprite, rat: Sprite) {
+    rat.destroy()
+    info.changeScoreBy(300)
+})
 game.onUpdate(function tick() {
     if (item_carrying) {
         item_carrying.setPosition(cook.x, cook.y + 6)

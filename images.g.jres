@@ -49,6 +49,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "pan"
     },
+    "image11": {
+        "data": "hwQQABAAAAAAAAADAAAAAAAAMDAAAAAAAAAAMAAAAAAAAAAwAAAAAAAAAIAAAAAAAAAAiAgAAAAAAACIOAAAAAAAgIgIAAAAAACAiAgAAAAAAICICAAAAAAAAIg4AAAAAAAwgwgAAAAAAACICAAAAAAAAIAIAAAAAAAAgAAAAAAAAAAwAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "rat"
+    },
     "anim1": {
         "namespace": "myAnimations",
         "id": "anim1",

@@ -108,6 +108,27 @@ def prepare_ingredient(): # add
         sprites.set_data_string(item_carrying, "ingredient", "cooked meat")
 controller.B.on_event(ControllerButtonEvent.PRESSED, prepare_ingredient)
 
+def rat_spawn():
+    rat = sprites.create(assets.image("rat"), SpriteKind.enemy)
+    rat.z = -1
+    rat.lifespan = 10000
+    tiles.place_on_random_tile(rat, assets.tile("crate"))
+    rat.set_flag(SpriteFlag.GHOST_THROUGH_WALLS, True)
+    rat.follow(sprites.all_of_kind(SpriteKind.plate)[0], 30)
+    timer.after(randint(8000, 15000), rat_spawn)
+timer.after(randint(8000, 15000), rat_spawn)
+
+def rat_steal(rat, plate):
+    sprites.destroy_all_sprites_of_kind(SpriteKind.plate)
+    create_order()
+    rat.follow(sprites.all_of_kind(SpriteKind.belt)[0], 30)
+sprites.on_overlap(SpriteKind.enemy, SpriteKind.plate, rat_steal)
+
+def catch_rat(player, rat):
+    rat.destroy()
+    info.change_score_by(300)
+sprites.on_overlap(SpriteKind.player, SpriteKind.enemy, catch_rat)
+
 def tick():
     if item_carrying:
         item_carrying.set_position(cook.x, cook.y + 6)
