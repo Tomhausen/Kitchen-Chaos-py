@@ -3,18 +3,24 @@ namespace SpriteKind {
     export const recipe_items = SpriteKind.create()
     export const plate = SpriteKind.create()
     export const belt = SpriteKind.create()
+    export const pan = SpriteKind.create()
 }
 
+//  add
 //  vars
 let item_carrying : Sprite = null
 let recipe : string[] = []
 //  sprites
 let cook = sprites.create(assets.image`cook`, SpriteKind.Player)
 controller.moveSprite(cook)
+let pan = sprites.create(assets.image`pan`, SpriteKind.pan)
+//  add
 //  setup
 scene.centerCameraAt(80, 68)
 info.startCountdown(60)
 let ingredients = ["meat", "bread", "lettuce", "tomato"]
+let prepared_ingredients = ["cooked meat", "bread", "lettuce", "tomato"]
+//  add
 function setup() {
     let icon: Sprite;
     let belt: Sprite;
@@ -29,20 +35,27 @@ function setup() {
         tiles.placeOnTile(belt, tile)
         animation.runImageAnimation(belt, assets.animation`conveyor belt`, 200, true)
     }
+    tiles.placeOnRandomTile(pan, assets.tile`counter`)
+    //  add
+    tiles.setTileAt(pan.tilemapLocation(), assets.tile`corner counter`)
 }
 
+//  add
 setup()
 function create_order() {
     
-    recipe = [ingredients[0], ingredients[1]]
+    recipe = [prepared_ingredients[0], prepared_ingredients[1]]
+    //  edit
     if (randint(1, 2) == 1) {
-        recipe.push(ingredients[2])
+        recipe.push(prepared_ingredients[2])
     }
     
+    //  edit
     if (randint(1, 2) == 1) {
-        recipe.push(ingredients[3])
+        recipe.push(prepared_ingredients[3])
     }
     
+    //  edit
     let plate = sprites.create(assets.image`plate`, SpriteKind.plate)
     plate.scale = 1 / 3
     tiles.placeOnRandomTile(plate, assets.tile`counter`)
@@ -88,7 +101,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function pick_up() {
     let ingredient: string;
     
     let belt_close = spriteutils.getSpritesWithin(SpriteKind.belt, 24, cook)
-    let plates_close = spriteutils.getSpritesWithin(SpriteKind.plate, 32, cook)
+    let plates_close = spriteutils.getSpritesWithin(SpriteKind.plate, 24, cook)
     let ingredients_close = spriteutils.getSpritesWithin(SpriteKind.Food, 24, cook)
     let icon_close = spriteutils.getSpritesWithin(SpriteKind.icon, 24, cook)
     if (item_carrying) {
@@ -111,6 +124,17 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function pick_up() {
         item_carrying = ingredients_close[0]
     } else if (icon_close.length > 0) {
         get_new_item(icon_close[0])
+    }
+    
+})
+controller.B.onEvent(ControllerButtonEvent.Pressed, function prepare_ingredient() {
+    //  add
+    
+    let pan_close = spriteutils.getSpritesWithin(SpriteKind.pan, 24, cook)
+    let ingredient = sprites.readDataString(item_carrying, "ingredient")
+    if (pan_close.length > 0 && ingredient == "meat") {
+        item_carrying.setImage(assets.image`cooked meat`)
+        sprites.setDataString(item_carrying, "ingredient", "cooked meat")
     }
     
 })

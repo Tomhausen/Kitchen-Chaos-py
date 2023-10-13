@@ -215,6 +215,25 @@ e e d e e 1 d d e d 1 b b e e .
 . . e e e e e e e b e e e e . . 
 . . . e e e e e e e e e e . . . 
 `;
+            case "image9":
+            case "pan":return img`
+. . . . . . . . . . . . . . f f 
+. . . . . . . . . . . . . f f f 
+. . . . . . . . . . . . f f f . 
+. . . . . . . . . . . f f f . . 
+. . . f f f f f f f f f f . . . 
+. . f 8 8 8 8 8 8 f f f . . . . 
+. f 8 9 9 9 9 9 9 8 f f . . . . 
+f 8 9 9 8 8 8 8 9 9 8 f . . . . 
+f 8 9 8 8 8 8 8 8 9 8 f . . . . 
+f 8 9 8 8 8 8 8 8 9 8 f . . . . 
+f 8 9 8 8 8 8 8 8 9 8 f . . . . 
+f 8 9 9 8 8 8 8 9 9 8 f . . . . 
+. f 8 9 9 9 9 9 9 8 f . . . . . 
+. . f 8 8 8 8 8 8 f . . . . . . 
+. . . f f f f f f . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`;
         }
         return null;
     })

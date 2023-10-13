@@ -4,6 +4,7 @@ class SpriteKind:
     recipe_items = SpriteKind.create()
     plate = SpriteKind.create()
     belt = SpriteKind.create()
+    pan = SpriteKind.create() # add
 
 # vars
 item_carrying: Sprite = None
@@ -12,11 +13,13 @@ recipe: List[string] = []
 # sprites
 cook = sprites.create(assets.image("cook"), SpriteKind.player)
 controller.move_sprite(cook)
+pan = sprites.create(assets.image("pan"), SpriteKind.pan) # add
 
 # setup
 scene.center_camera_at(80, 68)
 info.start_countdown(60)
 ingredients = ["meat", "bread", "lettuce", "tomato"]
+prepared_ingredients = ["cooked meat", "bread", "lettuce", "tomato"] # add
 
 def setup():
     scene.set_tile_map_level(assets.tilemap("kitchen"))
@@ -28,15 +31,17 @@ def setup():
         belt = sprites.create(image.create(16, 16), SpriteKind.belt)
         tiles.place_on_tile(belt, tile)
         animation.run_image_animation(belt, assets.animation("conveyor belt"), 200, True)
+    tiles.place_on_random_tile(pan, assets.tile("counter")) # add
+    tiles.set_tile_at(pan.tilemap_location(), assets.tile("corner counter")) # add
 setup()
 
 def create_order():
     global recipe
-    recipe = [ingredients[0], ingredients[1]]
+    recipe = [prepared_ingredients[0], prepared_ingredients[1]] # edit
     if randint(1, 2) == 1:
-        recipe.append(ingredients[2])
+        recipe.append(prepared_ingredients[2]) # edit
     if randint(1, 2) == 1:
-        recipe.append(ingredients[3])
+        recipe.append(prepared_ingredients[3]) # edit
     plate = sprites.create(assets.image("plate"), SpriteKind.plate)
     plate.scale = 1/3
     tiles.place_on_random_tile(plate, assets.tile("counter"))
@@ -72,12 +77,12 @@ def add_ingredient():
 def pick_up():
     global item_carrying
     belt_close = spriteutils.get_sprites_within(SpriteKind.belt, 24, cook)
-    plates_close = spriteutils.get_sprites_within(SpriteKind.plate, 32, cook)
+    plates_close = spriteutils.get_sprites_within(SpriteKind.plate, 24, cook)
     ingredients_close = spriteutils.get_sprites_within(SpriteKind.food, 24, cook)
     icon_close = spriteutils.get_sprites_within(SpriteKind.icon, 24, cook)
     if item_carrying:
         if item_carrying.kind() == SpriteKind.plate and len(belt_close) > 0:
-            info.change_score_by(500)            
+            info.change_score_by(500)
             item_carrying.destroy()
             create_order()
         elif len(plates_close) > 0:
@@ -93,6 +98,15 @@ def pick_up():
         elif len(icon_close) > 0:
             get_new_item(icon_close[0])
 controller.A.on_event(ControllerButtonEvent.PRESSED, pick_up)
+
+def prepare_ingredient(): # add
+    global item_carrying
+    pan_close = spriteutils.get_sprites_within(SpriteKind.pan, 24, cook)
+    ingredient = sprites.read_data_string(item_carrying, "ingredient")
+    if len(pan_close) > 0 and ingredient == "meat":
+        item_carrying.set_image(assets.image("cooked meat"))
+        sprites.set_data_string(item_carrying, "ingredient", "cooked meat")
+controller.B.on_event(ControllerButtonEvent.PRESSED, prepare_ingredient)
 
 def tick():
     if item_carrying:

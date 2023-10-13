@@ -44,6 +44,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "cooked meat"
     },
+    "image9": {
+        "data": "hwQQABAAAAAAAADw//8AAAAAAI+IiA8AAADwmJmZ+AAAAI+ZiJiJDwAAj4mIiIkPAACPiYiIiQ8AAI+JiIiJDwAAj4mIiIkPAACPmYiYiQ8AAP+YmZn4AAAA/4+IiA8AAPD/////AAAA/w8AAAAAAPD/AAAAAAAA/w8AAAAAAAD/AAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "pan"
+    },
     "anim1": {
         "namespace": "myAnimations",
         "id": "anim1",
