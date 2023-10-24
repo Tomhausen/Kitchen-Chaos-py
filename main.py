@@ -46,13 +46,22 @@ def create_order():
     plate.scale = 1/3
     tiles.place_on_random_tile(plate, assets.tile("counter"))
     display_order()
+    # guided
+    sprites.destroy_all_sprites_of_kind(SpriteKind.status_bar)
+    timer_bar = statusbars.create(60, 4, StatusBarKind.energy)
+    timer_bar.left = 5
+    timer_bar.y = 20
+    timer_bar.max = randint(20, 35)
+    timer_bar.value = timer_bar.max
+    timer_bar.set_color(7, 1)
+    # /guided
 create_order()
 
 def display_order():
     sprites.destroy_all_sprites_of_kind(SpriteKind.recipe_items)
     for i in range(len(recipe)):
         recipe_item = sprites.create(images.get_image(recipe[i]), SpriteKind.recipe_items)
-        recipe_item.set_position((i * 16) + 16, 20)
+        recipe_item.set_position((i * 16) + 16, 16) #
 
 def get_new_item(crate: Sprite):
     global item_carrying
@@ -116,7 +125,7 @@ def rat_spawn():
     rat.set_flag(SpriteFlag.GHOST_THROUGH_WALLS, True)
     rat.follow(sprites.all_of_kind(SpriteKind.plate)[0], 30)
     timer.after(randint(8000, 15000), rat_spawn)
-timer.after(randint(8000, 15000), rat_spawn)
+# timer.after(randint(8000, 15000), rat_spawn)
 
 def rat_steal(rat, plate):
     sprites.destroy_all_sprites_of_kind(SpriteKind.plate)
@@ -128,6 +137,23 @@ def catch_rat(player, rat):
     rat.destroy()
     info.change_score_by(300)
 sprites.on_overlap(SpriteKind.player, SpriteKind.enemy, catch_rat)
+
+def on_zero(status): #
+    info.change_score_by(-1000)
+    sprites.destroy_all_sprites_of_kind(SpriteKind.plate)
+    create_order()
+statusbars.on_zero(StatusBarKind.energy, on_zero)
+
+def timer_go_down(): #
+    timer_bar = statusbars.all_of_kind(StatusBarKind.energy)[0]
+    timer_bar.value -= 1
+    if timer_bar.value < timer_bar.max / 3:
+        timer_bar.set_color(2, 1)
+    elif timer_bar.value > timer_bar.max / 3 * 2:
+        timer_bar.set_color(7, 1)
+    else:
+        timer_bar.set_color(5, 1)
+game.on_update_interval(1000, timer_go_down)
 
 def tick():
     if item_carrying:

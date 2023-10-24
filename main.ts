@@ -60,18 +60,28 @@ function create_order() {
     plate.scale = 1 / 3
     tiles.placeOnRandomTile(plate, assets.tile`counter`)
     display_order()
+    //  guided
+    sprites.destroyAllSpritesOfKind(SpriteKind.StatusBar)
+    let timer_bar = statusbars.create(60, 4, StatusBarKind.Energy)
+    timer_bar.left = 5
+    timer_bar.y = 20
+    timer_bar.max = randint(20, 35)
+    timer_bar.value = timer_bar.max
+    timer_bar.setColor(7, 1)
 }
 
+//  /guided
 create_order()
 function display_order() {
     let recipe_item: Sprite;
     sprites.destroyAllSpritesOfKind(SpriteKind.recipe_items)
     for (let i = 0; i < recipe.length; i++) {
         recipe_item = sprites.create(images.getImage(recipe[i]), SpriteKind.recipe_items)
-        recipe_item.setPosition(i * 16 + 16, 20)
+        recipe_item.setPosition(i * 16 + 16, 16)
     }
 }
 
+// 
 function get_new_item(crate: Sprite) {
     
     item_carrying = sprites.create(crate.image, SpriteKind.Food)
@@ -138,17 +148,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function prepare_ingredient(
     }
     
 })
-function rat_spawn() {
-    let rat = sprites.create(assets.image`rat`, SpriteKind.Enemy)
-    rat.z = -1
-    rat.lifespan = 10000
-    tiles.placeOnRandomTile(rat, assets.tile`crate`)
-    rat.setFlag(SpriteFlag.GhostThroughWalls, true)
-    rat.follow(sprites.allOfKind(SpriteKind.plate)[0], 30)
-    timer.after(randint(8000, 15000), rat_spawn)
-}
-
-timer.after(randint(8000, 15000), rat_spawn)
+//  timer.after(randint(8000, 15000), rat_spawn)
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.plate, function rat_steal(rat: Sprite, plate: Sprite) {
     sprites.destroyAllSpritesOfKind(SpriteKind.plate)
     create_order()
@@ -157,6 +157,25 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.plate, function rat_steal(rat: Sp
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function catch_rat(player: Sprite, rat: Sprite) {
     rat.destroy()
     info.changeScoreBy(300)
+})
+statusbars.onZero(StatusBarKind.Energy, function on_zero(status: StatusBarSprite) {
+    // 
+    info.changeScoreBy(-1000)
+    sprites.destroyAllSpritesOfKind(SpriteKind.plate)
+    create_order()
+})
+game.onUpdateInterval(1000, function timer_go_down() {
+    // 
+    let timer_bar = statusbars.allOfKind(StatusBarKind.Energy)[0]
+    timer_bar.value -= 1
+    if (timer_bar.value < timer_bar.max / 3) {
+        timer_bar.setColor(2, 1)
+    } else if (timer_bar.value > timer_bar.max / 3 * 2) {
+        timer_bar.setColor(7, 1)
+    } else {
+        timer_bar.setColor(5, 1)
+    }
+    
 })
 game.onUpdate(function tick() {
     if (item_carrying) {

@@ -7,7 +7,8 @@
         "Tiles Advanced": "github:Tomhausen/The-Code-Zone-Tiles-Advanced#v0.2.1",
         "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.2.1",
         "Assets from Strings": "github:tomhausen/assets-from-string#v0.0.3",
-        "Timers": "github:microsoft/arcade-timers#v1.1.0"
+        "Timers": "github:microsoft/arcade-timers#v1.1.0",
+        "pxt-status-bar": "github:jwunderl/pxt-status-bar#v0.4.2"
     },
     "files": [
         "main.blocks",
