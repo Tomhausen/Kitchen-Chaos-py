@@ -67,7 +67,6 @@ function create_order() {
     timer_bar.y = 20
     timer_bar.max = randint(20, 35)
     timer_bar.value = timer_bar.max
-    timer_bar.setColor(7, 1)
 }
 
 //  /guided
